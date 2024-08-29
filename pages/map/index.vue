@@ -3,6 +3,7 @@
     <div style="height: 100vh; width: 100vw">
       <client-only>
         <div :id="amapId" style="height: 100vh; width: 100vw" />
+        <div class="copy_img" @click="copy">{{ $t('profile_page.txt') }}</div>
       </client-only>
     </div>
   </Container>
@@ -10,6 +11,7 @@
 
 <script lang="ts" setup>
 import "@amap/amap-jsapi-types";
+import {copyDivToImage, domToImg} from '@/utils/units';
 import { shallowRef } from "vue";
 
 defineOptions({
@@ -28,6 +30,10 @@ const map = shallowRef();
 const amapId = computed(() => {
   return `amapId_${Date.now()}`;
 });
+const copy = () => {
+  domToImg('')
+  // copyDivToImage('')
+}
 // 初始化
 const initMap = async () => {
   await nextTick();
@@ -154,5 +160,19 @@ onBeforeUnmount(() => {
 <style lang="less">
 body {
   margin: 0;
+}
+.copy_img {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  text-align: center;
+  border-radius: 51.2px;
+  font-size: 16px;
+  color: #fff;
+  border: 2px solid #f3d8ff;
+  background: #ff5def;
+  width: 100px;
+  height: 38px;
+  line-height: 38px;
 }
 </style>
